@@ -555,9 +555,9 @@ export default function Home() {
           <div className="mb-6 flex justify-center">
             <img src="/logo.png" alt="Logo" className="w-16 h-16 md:w-20 md:h-20" />
           </div>
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 leading-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-purple-800 mb-4 leading-tight">
             夫妻沟通<br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-orange-500">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600">
               让爱更近一步
             </span>
           </h1>
