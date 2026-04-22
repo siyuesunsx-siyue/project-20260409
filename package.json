@@ -77,13 +77,14 @@
     "tailwindcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
-    "@types/react-dom": "^19"
+    "@types/react-dom": "^19",
+    "@types/pg": "^8.16.0"
+
 
   },
   "devDependencies": {
     
     "@react-dev-inspector/middleware": "^2.0.1",
-    "@types/pg": "^8.16.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "only-allow": "^1.2.2",

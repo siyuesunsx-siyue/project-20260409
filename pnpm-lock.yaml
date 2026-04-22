@@ -110,6 +110,9 @@ importers:
       '@types/node':
         specifier: ^20
         version: 20.19.30
+      '@types/pg':
+        specifier: ^8.16.0
+        version: 8.16.0
       '@types/react':
         specifier: ^19
         version: 19.2.10
@@ -213,9 +216,6 @@ importers:
       '@react-dev-inspector/middleware':
         specifier: ^2.0.1
         version: 2.0.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(webpack@5.104.1(esbuild@0.25.12))
-      '@types/pg':
-        specifier: ^8.16.0
-        version: 8.16.0
       eslint:
         specifier: ^9
         version: 9.39.2(jiti@2.6.1)
