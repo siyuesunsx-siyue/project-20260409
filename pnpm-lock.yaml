@@ -95,6 +95,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: ^1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.10))(@types/react@19.2.10)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@react-dev-inspector/babel-plugin':
+        specifier: ^2.0.1
+        version: 2.0.1
       '@supabase/supabase-js':
         specifier: 2.95.3
         version: 2.95.3
@@ -189,9 +192,6 @@ importers:
         specifier: ^4.3.5
         version: 4.3.6
     devDependencies:
-      '@react-dev-inspector/babel-plugin':
-        specifier: ^2.0.1
-        version: 2.0.1
       '@react-dev-inspector/middleware':
         specifier: ^2.0.1
         version: 2.0.1(eslint@9.39.2(jiti@2.6.1))(typescript@5.9.3)(webpack@5.104.1(esbuild@0.25.12))
