@@ -78,7 +78,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@types/pg": "^8.16.0"
+    "@types/pg": "^8.16.0",
+    "tsup": "^8.3.5"
+
 
 
   },
@@ -89,7 +91,6 @@
     "eslint-config-next": "16.1.1",
     "only-allow": "^1.2.2",
     "shadcn": "latest",
-    "tsup": "^8.3.5",
     "tsx": "^4.19.2"
   },
   "packageManager": "pnpm@9.0.0",
