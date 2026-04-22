@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { getSupabaseClient } from '@/storage/database/supabase-client';
+import { eq } from 'drizzle-orm';
+import { getDrizzleDb } from '@/lib/db';
+import { users } from '@/storage/database/shared/schema';
 
 export async function POST(request: NextRequest) {
   try {
@@ -29,14 +31,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const client = getSupabaseClient();
+    const db = getDrizzleDb();
+    if (!db) {
+      throw new Error('DATABASE_URL is not set');
+    }
 
     // 检查用户名是否已存在
-    const { data: existingUser } = await client
-      .from('users')
-      .select('id')
-      .eq('username', username)
-      .maybeSingle();
+    const [existingUser] = await db
+      .select({ id: users.id })
+      .from(users)
+      .where(eq(users.username, username))
+      .limit(1);
 
     if (existingUser) {
       return NextResponse.json(
@@ -49,17 +54,20 @@ export async function POST(request: NextRequest) {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 创建用户
-    const { data: newUser, error } = await client
-      .from('users')
-      .insert({
+    const [newUser] = await db
+      .insert(users)
+      .values({
         username,
         password: hashedPassword,
       })
-      .select('id, username, created_at')
-      .single();
+      .returning({
+        id: users.id,
+        username: users.username,
+        createdAt: users.createdAt,
+      });
 
-    if (error) {
-      throw new Error(`注册失败: ${error.message}`);
+    if (!newUser) {
+      throw new Error('注册失败: 用户创建失败');
     }
 
     // 设置 cookie

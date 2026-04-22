@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
-import { getSupabaseClient } from '@/storage/database/supabase-client';
+import { eq } from 'drizzle-orm';
+import { getDrizzleDb } from '@/lib/db';
+import { users } from '@/storage/database/shared/schema';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,18 +17,21 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const client = getSupabaseClient();
+    const db = getDrizzleDb();
+    if (!db) {
+      throw new Error('DATABASE_URL is not set');
+    }
 
     // 查找用户
-    const { data: user, error } = await client
-      .from('users')
-      .select('id, username, password')
-      .eq('username', username)
-      .maybeSingle();
-
-    if (error) {
-      throw new Error(`登录失败: ${error.message}`);
-    }
+    const [user] = await db
+      .select({
+        id: users.id,
+        username: users.username,
+        password: users.password,
+      })
+      .from(users)
+      .where(eq(users.username, username))
+      .limit(1);
 
     if (!user) {
       return NextResponse.json(
