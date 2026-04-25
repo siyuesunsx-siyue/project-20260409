@@ -18,8 +18,7 @@ export async function sendDailyLoveLetter(
     const loveLetter = await generateLoveLetter(userName)
   
     await resend.emails.send({
-      from: '纸片人男友 <hello@你的域名.com>',
-      to: userEmail,
+        from: '纸片人男友 <onboarding@resend.dev>',      to: userEmail,
       subject: `早安 ${userName}，今天也想你了`,
       html: `
         <div style="font-family: sans-serif; max-width: 500px; margin: 0 auto;">
@@ -43,7 +42,7 @@ export async function sendDailyLoveLetter(
     
     const allUsers = await db.select().from(users)  
     for (const user of allUsers) {      try {
-        await sendDailyLoveLetter(user.username, user.username)      } catch (error) {
+        await sendDailyLoveLetter('siyuesunsx@gmail.com', user.username)      } catch (error) {
             console.error(`给 ${user.username} 发情话失败：`, error)        // 某个用户失败不影响其他用户
       }
     }
